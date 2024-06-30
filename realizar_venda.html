@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<head>
+    <title>Realizar Venda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        fieldset {
+            border: none;
+            margin-bottom: 15px;
+        }
+        legend {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .form-actions {
+            text-align: center;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function addRow() {
+            const tableBody = document.getElementById('item-rows');
+            const rowCount = tableBody.rows.length;
+            const newRow = document.getElementById('empty-form').cloneNode(true);
+
+            newRow.style.display = '';
+            newRow.id = '';
+            newRow.innerHTML = newRow.innerHTML.replace(/__prefix__/g, rowCount);
+
+            tableBody.appendChild(newRow);
+
+            document.getElementById('id_item-TOTAL_FORMS').value = rowCount + 1;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Realizar Venda</h1>
+        <form method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Informações da Venda</legend>
+                {{ form_venda.cliente }}
+                
+                <label for="id_desconto">Desconto:</label>
+                <label for="id_cliente">Cliente:</label>
+                {{ form_venda.desconto }}
+            </fieldset>
+
+            <fieldset>
+                <legend>Itens da Venda</legend>
+                {{ formset_itens.management_form }}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="item-rows">
+                        {% for form in formset_itens %}
+                            <tr>
+                                <td>{{ form.produto }}</td>
+                                <td>{{ form.quantidade }}</td>
+                                <td>{{ form.DELETE }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr id="empty-form" style="display: none;">
+                            <td>
+                                <select name="item-__prefix__-produto" id="id_item-__prefix__-produto">
+                                    {% for produto in formset_itens.empty_form.fields.produto.queryset %}
+                                        <option value="{{ produto.id }}">{{ produto.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" name="item-__prefix__-quantidade" id="id_item-__prefix__-quantidade">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="item-__prefix__-DELETE" id="id_item-__prefix__-DELETE">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" onclick="addRow()">Adicionar Item</button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Pagamento</legend>
+                <label for="id_metodo_pagamento">Método de Pagamento:</label>
+                <select name="metodo_pagamento" id="id_metodo_pagamento">
+                    <option value="cartao_credito">Cartão de Crédito</option>
+                    <option value="boleto">Pix</option>
+                    <option value="dinheiro">Dinheiro</option>
+                </select>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit">Finalizar Venda</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+{% endblock %}
+
+
+

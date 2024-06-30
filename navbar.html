@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #7fdbff; /* Cor aqua */
+            padding: 10px 20px;
+        }
+        nav a {
+            color: #007bff; /* Cor azul para contraste */
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #a3eaff; /* Cor aqua mais clara */
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .navbar-links {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-links a {
+                width: 100%;
+                text-align: left;
+                margin: 2px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navbar-brand">
+            <a href="{% url 'homepage' %}">SystemPDV</a>
+        </div>
+        <div class="navbar-links">
+            <a href="{% url 'cadastrar_produto' %}">Cadastrar Produto</a>
+            <a href="{% url 'cadastrar_cliente' %}">Cadastrar Cliente</a>
+            <a href="{% url 'realizar_venda' %}">Realizar Vendas</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'minha_conta' %}">Minha Conta</a>
+        </div>
+    </nav>
+</body>
+</html>

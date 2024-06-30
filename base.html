@@ -1,0 +1,25 @@
+{% load static %}
+
+<html lang="pt_br" xmlns:background-color= #B0E0E6>
+<head>
+    <meta charset="UTF-8">
+    <p style=”color: blue; background-color:#00FFFF;></p>
+    <p style=”color:blue”></p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Systemflix PDV </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+
+    {% include "navbar.html" %}
+    {% block body %}
+    {% endblock %}
+
+
+</body>
+</html>

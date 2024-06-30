@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .btn-new-product {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .btn-new-product:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listar Produtos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Codigo Produto</th>
+                <th>Nome</th>
+                <th>Preço Compra</th>
+                <th>Estoque</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.cod_produto }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>R$ {{ produto.preco_compra}}</td>
+                <td>{{ produto.estoque }}</td>
+                <td>R$ {{ produto.preco }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cadastrar_produto' %}" class="btn-new-product">Cadastrar Novo Produto</a>
+</body>
+</html>
+{% endblock %}

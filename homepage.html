@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bem-vindo ao Sistema de Vendas</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+                    <li><a href="{% url 'cadastrar_cliente' %}">Produtos</a></li>
+                    <li><a href="{% url 'cadastrar_produto' %}">Sobre</a></li>
+                    <li><a href="{% url 'realizar_venda' %}">Contato</a></li>
+                    <li><a href="{% url 'login' %}">Sobre</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Obtenha o que há de melhor no mundo em um só lugar color:block </h2>
+                <img src="{% static 'images/tecno.jpg' %}" alt="Tecnologia" class="hero-image" >
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <img src="{% static 'images/venda.jpg' %}" alt="Venda">
+                    <h3>Venda</h3>
+                </div>
+                <div class="feature-item">
+                    <img src="{% static 'images/estoque.jpg' %}" alt="Estoque">
+                    <h3>Estoque</h3>
+                </div>
+                <div class="feature-item">
+                    <img src="{% static 'images/financeiro.jpg' %}" alt="Financeiro">
+                    <h3>Financeiro</h3>
+                </div>
+                <div class="feature-item">
+                    <img src="{% static 'images/notafiscal.jpg' %}" alt="Nota Fiscal">
+                    <h3>Nota Fiscal</h3>
+                </div>
+                <div class="feature-item">
+                    <img src="{% static 'images/cadastro.jpg' %}" alt="Cadastro">
+                    <h3>Cadastro</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="actions">
+        <div class="container">
+            <ul>
+                <li><button><a href="{% url 'cadastrar_cliente' %}">Cadastrar Cliente</a></button></li>
+                <li><button><a href="{% url 'cadastrar_produto' %}">Cadastrar Produto</a></button></li>
+                <li><button><a href="{% url 'realizar_venda' %}">Realizar Venda</a></button></li>
+                <li><button><a href="{% url 'listar_clientes' %}">Listar Clientes</a></button></li>
+                <li><button><a href="{% url 'listar_produtos' %}">Listar Produtos</a></button></li>
+                <li><button><a href="{% url 'listar_vendas' %}">Listar Vendas</a></button></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li>&copy; 2022</li>
+                <li>Feito com Python (Django)</li>
+                <li>BragaBusiness</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+{% endblock %}

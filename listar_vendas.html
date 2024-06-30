@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .venda {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .total, .desconto {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listar Vendas</h1>
+    {% for venda in vendas %}
+        <div class="venda">
+            <h2>Venda</h2>
+            <p><strong>Cliente:</strong> {{ venda.cliente.nome }}</p>
+            <p><strong>Data:</strong> {{ venda.data }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Valor Unitário</th>
+                        <th>Quantidade</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in venda.itens.all %}
+                        <tr>
+                            <td>{{ item.produto.nome }}</td>
+                            <td>R$ {{ item.produto.preco }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>R$ {{ item.get_subtotal }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="desconto">Desconto:</td>
+                        <td>R$ {{ venda.desconto }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="total">Total:</td>
+                        <td>R$ {{ venda.get_total }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    {% endfor %}
+    <div style="text-align: center;">
+        <a href="{% url 'realizar_venda' %}">
+            <button>Realizar Nova Venda</button>
+        </a>
+        <a href="{% url 'emitir_nota_fiscal' %}">
+            <button>Emitir Nota Fiscal</button>
+        </a>
+
+            <button> NFCE</button>
+        </a>
+        </a>
+
+            <button> NOTA</button>
+        </a>
+    </div>
+</body>
+</html>
+
+{% endblock %}
